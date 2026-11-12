@@ -1,0 +1,7 @@
+# Zorunlu bağımlılık yok — Python 3.8+ standart kütüphanesi yeterlidir.
+
+# İsteğe bağlı (zengin terminal tablosu için):
+rich>=13.0.0
+
+# Ham .evtx dosyalarını ayrıştırmak için (python-evtx kütüphanesi):
+# python-evtx>=0.7.4

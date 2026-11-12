@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Log Analiz Raporu — windows_events.json</title>
+<style>
+:root {
+  --bg: #0f1117;
+  --surface: #1a1d2e;
+  --surface2: #242740;
+  --border: #2e3250;
+  --text: #e2e8f0;
+  --text-dim: #94a3b8;
+  --red: #f87171;
+  --orange: #fb923c;
+  --yellow: #fbbf24;
+  --green: #34d399;
+  --blue: #60a5fa;
+  --purple: #a78bfa;
+  --cyan: #22d3ee;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg);
+       color: var(--text); padding: 24px; }
+h1 { font-size: 1.8rem; color: var(--cyan); margin-bottom: 4px; }
+.subtitle { color: var(--text-dim); margin-bottom: 24px; font-size: .9rem; }
+/* Summary cards */
+.cards { display: flex; flex-wrap: wrap; gap: 16px; margin-bottom: 32px; }
+.card { background: var(--surface); border: 1px solid var(--border);
+        border-radius: 10px; padding: 18px 24px; min-width: 160px; flex: 1; }
+.card .label { font-size: .78rem; color: var(--text-dim); text-transform: uppercase;
+               letter-spacing: .06em; }
+.card .value { font-size: 2rem; font-weight: 700; margin-top: 4px; }
+.card.critical .value { color: var(--red); }
+.card.high     .value { color: var(--orange); }
+.card.medium   .value { color: var(--yellow); }
+.card.safe     .value { color: var(--green); }
+.card.info     .value { color: var(--blue); }
+/* Sections */
+.section { margin-bottom: 32px; }
+.section-header { display: flex; align-items: center; gap: 10px; margin-bottom: 12px;
+                  border-bottom: 1px solid var(--border); padding-bottom: 8px; }
+.section-header h2 { font-size: 1.1rem; }
+.count-badge { background: var(--surface2); border-radius: 20px; padding: 2px 10px;
+               font-size: .78rem; color: var(--text-dim); }
+/* Table */
+.table-wrapper { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: .85rem; }
+thead { background: var(--surface2); }
+th, td { padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--border); }
+th { font-size: .78rem; text-transform: uppercase; letter-spacing: .05em;
+     color: var(--text-dim); white-space: nowrap; }
+tr:hover td { background: var(--surface2); }
+code { background: #0d1117; padding: 2px 6px; border-radius: 4px;
+       font-family: 'Cascadia Code', monospace; font-size: .82rem;
+       color: var(--cyan); word-break: break-all; }
+/* Badges */
+.badge { display: inline-block; padding: 2px 8px; border-radius: 4px;
+         font-size: .72rem; font-weight: 700; letter-spacing: .05em; }
+.badge-critical { background: rgba(248,113,113,.2); color: var(--red); border: 1px solid var(--red); }
+.badge-high     { background: rgba(251,146,60,.15); color: var(--orange); border: 1px solid var(--orange); }
+.badge-medium   { background: rgba(251,191,36,.12); color: var(--yellow); border: 1px solid var(--yellow); }
+.badge-low      { background: rgba(52,211,153,.12); color: var(--green); border: 1px solid var(--green); }
+.empty { color: var(--green); padding: 12px 0; font-style: italic; }
+/* Collapsible */
+details summary { cursor: pointer; list-style: none; }
+details summary::-webkit-details-marker { display: none; }
+/* Search box */
+.search-box { width: 100%; max-width: 400px; padding: 8px 14px;
+              background: var(--surface2); border: 1px solid var(--border);
+              border-radius: 8px; color: var(--text); font-size: .9rem;
+              margin-bottom: 16px; }
+.search-box:focus { outline: none; border-color: var(--cyan); }
+/* Nav */
+nav { display: flex; gap: 12px; margin-bottom: 28px; flex-wrap: wrap; }
+nav a { color: var(--blue); text-decoration: none; font-size: .85rem;
+        background: var(--surface); padding: 6px 14px; border-radius: 6px;
+        border: 1px solid var(--border); }
+nav a:hover { border-color: var(--blue); }
+/* Footer */
+footer { margin-top: 48px; color: var(--text-dim); font-size: .78rem;
+         border-top: 1px solid var(--border); padding-top: 16px; }
+</style>
+</head>
+<body>
+<h1>🛡️ Log Analiz Raporu — windows_events.json</h1>
+<p class="subtitle">Oluşturulma zamanı: 2026-11-12 17:07:55 &nbsp;|&nbsp; Analiz zamanı: 2026-11-12T14:07:55.714972+00:00</p>
+
+<nav>
+  <a href="#sec-brute">🔴 Brute-Force (1)</a>
+  <a href="#sec-privesc">🟠 Yetki Yükseltme (7)</a>
+  <a href="#sec-susptime">🟡 Şüpheli Oturum (2)</a>
+  <a href="#sec-suspproc">🔵 Şüpheli Süreç (2)</a>
+</nav>
+
+
+<div class="cards">
+  <div class="card info">
+    <div class="label">Toplam Olay</div>
+    <div class="value">20</div>
+  </div>
+  <div class="card critical">
+    <div class="label">Toplam Anomali</div>
+    <div class="value">12</div>
+  </div>
+  <div class="card safe">
+    <div class="label">Kritik</div>
+    <div class="value">0</div>
+  </div>
+  <div class="card high">
+    <div class="label">Yüksek</div>
+    <div class="value">2</div>
+  </div>
+  <div class="card medium">
+    <div class="label">Orta</div>
+    <div class="value">9</div>
+  </div>
+  <div class="card safe">
+    <div class="label">Düşük</div>
+    <div class="value">1</div>
+  </div>
+</div>
+
+<!-- BRUTE FORCE -->
+<div class="section" id="sec-brute">
+  <div class="section-header">
+    <h2>🔴 Brute-Force Saldırıları</h2>
+    <span class="count-badge">1 kayıt</span>
+  </div>
+  <input class="search-box" id="search-brute" placeholder="Filtrele…">
+  
+<div class="table-wrapper">
+<table id="tbl-brute">
+  <thead><tr><th>IP Adresi</th><th>Deneme</th><th>Şiddet</th><th>Denenen Kullanıcılar</th><th>Pencere Başlangıcı</th><th>Pencere Bitişi</th><th>Açıklama</th></tr></thead>
+  <tbody><tr><td></td><td><strong>5</strong></td><td><span class="badge badge-low">DÜŞÜK</span></td><td>Guest, Administrator, backup</td><td>2026-11-01T02:14:01</td><td>2026-11-01T02:14:09</td><td> adresinden 300s içinde 5 başarısız giriş denemesi tespit edildi.</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<!-- PRİVESC -->
+<div class="section" id="sec-privesc">
+  <div class="section-header">
+    <h2>🟠 Yetki Yükseltme Girişimleri</h2>
+    <span class="count-badge">7 kayıt</span>
+  </div>
+  <input class="search-box" id="search-privesc" placeholder="Filtrele…">
+  
+<div class="table-wrapper">
+<table id="tbl-privesc">
+  <thead><tr><th>Zaman</th><th>Kullanıcı</th><th>Şiddet</th><th>Olay Türü</th><th>Komut</th><th>Açıklama</th></tr></thead>
+  <tbody><tr><td>2026-11-01T02:30:00</td><td>john.doe</td><td><span class="badge badge-medium">ORTA</span></td><td>logon_success</td><td></td><td>Windows EventID 4624: john.doe için logon_success. </td></tr>
+<tr><td>2026-11-01T02:30:05</td><td>john.doe</td><td><span class="badge badge-medium">ORTA</span></td><td>special_privileges</td><td></td><td>Windows EventID 4672: john.doe için special_privileges. </td></tr>
+<tr><td>2026-11-01T03:30:00</td><td>attacker</td><td><span class="badge badge-medium">ORTA</span></td><td>logon_success</td><td></td><td>Windows EventID 4624: attacker için logon_success. </td></tr>
+<tr><td>2026-11-01T03:35:00</td><td>SYSTEM</td><td><span class="badge badge-medium">ORTA</span></td><td>new_service</td><td></td><td>Windows EventID 7045: SYSTEM için new_service. </td></tr>
+<tr><td>2026-11-01T04:00:00</td><td>backdoor_admin</td><td><span class="badge badge-medium">ORTA</span></td><td>account_created</td><td></td><td>Windows EventID 4720: backdoor_admin için account_created. </td></tr>
+<tr><td>2026-11-01T04:01:00</td><td>backdoor_admin</td><td><span class="badge badge-medium">ORTA</span></td><td>local_group_member</td><td></td><td>Windows EventID 4732: backdoor_admin için local_group_member. </td></tr>
+<tr><td>2026-11-02T09:00:00</td><td>alice</td><td><span class="badge badge-medium">ORTA</span></td><td>logon_success</td><td></td><td>Windows EventID 4624: alice için logon_success. </td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<!-- SUSPICIOUS TIME -->
+<div class="section" id="sec-susptime">
+  <div class="section-header">
+    <h2>🟡 Şüpheli Saatlerdeki Oturumlar</h2>
+    <span class="count-badge">2 kayıt</span>
+  </div>
+  <input class="search-box" id="search-susptime" placeholder="Filtrele…">
+  
+<div class="table-wrapper">
+<table id="tbl-susptime">
+  <thead><tr><th>Zaman</th><th>Kullanıcı</th><th>IP / Bilgisayar</th><th>Saat</th><th>Gün</th><th>Neden</th></tr></thead>
+  <tbody><tr><td>2026-11-01T02:30:00</td><td>john.doe</td><td></td><td>2</td><td>Sunday</td><td>hafta sonu gece saati</td></tr>
+<tr><td>2026-11-01T03:30:00</td><td>attacker</td><td></td><td>3</td><td>Sunday</td><td>hafta sonu gece saati</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<!-- SUSPICIOUS PROCESS -->
+<div class="section" id="sec-suspproc">
+  <div class="section-header">
+    <h2>🔵 Şüpheli Süreçler (Sysmon/Windows)</h2>
+    <span class="count-badge">2 kayıt</span>
+  </div>
+  <input class="search-box" id="search-suspproc" placeholder="Filtrele…">
+  
+<div class="table-wrapper">
+<table id="tbl-suspproc">
+  <thead><tr><th>Zaman</th><th>Kullanıcı</th><th>Bilgisayar</th><th>İşlem</th><th>Komut Satırı</th></tr></thead>
+  <tbody><tr><td>2026-11-01T02:31:00</td><td>john.doe</td><td>WORKSTATION01</td><td>C:\Windows\System32\cmd.exe</td><td><code>cmd.exe /c mimikatz.exe privilege::debug sekurlsa::logonpasswords exit</code></td></tr>
+<tr><td>2026-11-01T03:00:00</td><td>SYSTEM</td><td>WORKSTATION01</td><td>C:\Windows\System32\powershell.exe</td><td><code>powershell.exe -NoP -NonI -W Hidden -Exec Bypass -EncodedCommand JABzAD0ATgBlAHcA</code></td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<footer>
+  Log Analyzer — Otomatik güvenlik raporu. Bu rapor doğrulama gerektiren bulgular içerebilir.
+</footer>
+
+<script>
+function filterTable(inputId, tableId) {
+  const input = document.getElementById(inputId);
+  const table = document.getElementById(tableId);
+  if (!table) return;
+  input.addEventListener('keyup', () => {
+    const q = input.value.toLowerCase();
+    const rows = table.querySelectorAll('tbody tr');
+    rows.forEach(r => {
+      r.style.display = r.textContent.toLowerCase().includes(q) ? '' : 'none';
+    });
+  });
+}
+filterTable('search-brute',    'tbl-brute');
+filterTable('search-privesc',  'tbl-privesc');
+filterTable('search-susptime', 'tbl-susptime');
+filterTable('search-suspproc', 'tbl-suspproc');
+
+// Smooth scroll for nav links
+document.querySelectorAll('nav a').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) target.scrollIntoView({ behavior: 'smooth' });
+  });
+});
+</script>
+</body>
+</html>

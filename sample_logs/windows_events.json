@@ -1,0 +1,161 @@
+[
+  {
+    "EventID": 4625,
+    "@timestamp": "2026-11-01T02:14:01",
+    "Computer": "WORKSTATION01",
+    "User": "Administrator",
+    "IpAddress": "192.168.1.100",
+    "LogonType": "3",
+    "FailureReason": "Unknown user name or bad password"
+  },
+  {
+    "EventID": 4625,
+    "@timestamp": "2026-11-01T02:14:03",
+    "Computer": "WORKSTATION01",
+    "User": "Administrator",
+    "IpAddress": "192.168.1.100",
+    "LogonType": "3",
+    "FailureReason": "Unknown user name or bad password"
+  },
+  {
+    "EventID": 4625,
+    "@timestamp": "2026-11-01T02:14:05",
+    "Computer": "WORKSTATION01",
+    "User": "Administrator",
+    "IpAddress": "192.168.1.100",
+    "LogonType": "3"
+  },
+  {
+    "EventID": 4625,
+    "@timestamp": "2026-11-01T02:14:07",
+    "Computer": "WORKSTATION01",
+    "User": "Guest",
+    "IpAddress": "192.168.1.100",
+    "LogonType": "3"
+  },
+  {
+    "EventID": 4625,
+    "@timestamp": "2026-11-01T02:14:09",
+    "Computer": "WORKSTATION01",
+    "User": "backup",
+    "IpAddress": "192.168.1.100",
+    "LogonType": "3"
+  },
+  {
+    "EventID": 4625,
+    "@timestamp": "2026-11-01T02:14:11",
+    "Computer": "WORKSTATION01",
+    "User": "john",
+    "IpAddress": "192.168.1.100",
+    "LogonType": "3"
+  },
+  {
+    "EventID": 4624,
+    "@timestamp": "2026-11-01T02:30:00",
+    "Computer": "WORKSTATION01",
+    "User": "john.doe",
+    "IpAddress": "10.0.0.5",
+    "LogonType": "10"
+  },
+  {
+    "EventID": 4672,
+    "@timestamp": "2026-11-01T02:30:05",
+    "Computer": "WORKSTATION01",
+    "User": "john.doe",
+    "PrivilegeList": "SeSecurityPrivilege, SeTakeOwnershipPrivilege, SeLoadDriverPrivilege"
+  },
+  {
+    "EventID": 4688,
+    "@timestamp": "2026-11-01T02:31:00",
+    "Computer": "WORKSTATION01",
+    "User": "john.doe",
+    "Image": "C:\\Windows\\System32\\cmd.exe",
+    "CommandLine": "cmd.exe /c mimikatz.exe privilege::debug sekurlsa::logonpasswords exit"
+  },
+  {
+    "EventID": 4688,
+    "@timestamp": "2026-11-01T03:00:00",
+    "Computer": "WORKSTATION01",
+    "User": "SYSTEM",
+    "Image": "C:\\Windows\\System32\\powershell.exe",
+    "CommandLine": "powershell.exe -NoP -NonI -W Hidden -Exec Bypass -EncodedCommand JABzAD0ATgBlAHcA"
+  },
+  {
+    "EventID": 4624,
+    "@timestamp": "2026-11-01T03:30:00",
+    "Computer": "SERVER01",
+    "User": "attacker",
+    "IpAddress": "198.51.100.7",
+    "LogonType": "3"
+  },
+  {
+    "EventID": 7045,
+    "@timestamp": "2026-11-01T03:35:00",
+    "Computer": "SERVER01",
+    "User": "SYSTEM",
+    "ServiceName": "malicious_service",
+    "ImagePath": "C:\\Users\\Public\\nc.exe -l -p 4444 -e cmd.exe"
+  },
+  {
+    "EventID": 4720,
+    "@timestamp": "2026-11-01T04:00:00",
+    "Computer": "SERVER01",
+    "User": "backdoor_admin",
+    "SubjectUserName": "attacker"
+  },
+  {
+    "EventID": 4732,
+    "@timestamp": "2026-11-01T04:01:00",
+    "Computer": "SERVER01",
+    "User": "backdoor_admin",
+    "GroupName": "Administrators"
+  },
+  {
+    "EventID": 4624,
+    "@timestamp": "2026-11-02T09:00:00",
+    "Computer": "WORKSTATION02",
+    "User": "alice",
+    "IpAddress": "10.0.0.10",
+    "LogonType": "2"
+  },
+  {
+    "EventID": 4625,
+    "@timestamp": "2026-11-02T01:00:00",
+    "Computer": "SERVER02",
+    "User": "Administrator",
+    "IpAddress": "45.33.32.156",
+    "LogonType": "3"
+  },
+  {
+    "EventID": 4625,
+    "@timestamp": "2026-11-02T01:00:02",
+    "Computer": "SERVER02",
+    "User": "Administrator",
+    "IpAddress": "45.33.32.156",
+    "LogonType": "3"
+  },
+  {
+    "EventID": 4625,
+    "@timestamp": "2026-11-02T01:00:04",
+    "Computer": "SERVER02",
+    "User": "Administrator",
+    "IpAddress": "45.33.32.156",
+    "LogonType": "3"
+  },
+  {
+    "EventID": 4625,
+    "@timestamp": "2026-11-02T01:00:06",
+    "Computer": "SERVER02",
+    "User": "Administrator",
+    "IpAddress": "45.33.32.156",
+    "LogonType": "3"
+  },
+  {
+    "EventID": 4625,
+    "@timestamp": "2026-11-02T01:00:08",
+    "Computer": "SERVER02",
+    "User": "Administrator",
+    "IpAddress": "45.33.32.156",
+    "LogonType": "3"
+  }
+]

